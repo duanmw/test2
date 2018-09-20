@@ -20,14 +20,11 @@
         }
         
         #search-box {
-            /* text-align: center; */
             margin: 20px 0 0 100px;
             position: relative;
         }
         
         #wrap {
-            /* display: inline-block; */
-            /* border: 1px solid #999999; */
             padding: 0 6px;
             height: 26px;
             width: 200px;
@@ -114,26 +111,23 @@
             var tipDiv = document.createElement("div");
             boxObj.appendChild(tipDiv); //添加
             tipDiv.id = "tip-box";
-            // var str = "";
             for (let i = 0; i < tempArr.length; i++) {
                 var pObj = document.createElement("p");
-                //把p加到div中
+                //把p元素加到div中
                 tipDiv.appendChild(pObj);
                 pObj.innerHTML = tempArr[i];
             }
             if (document.getElementById("tip-box")) {
-                // console.log("tipObj")
+
                 var tipObj = document.getElementById("tip-box").children;
                 console.log(tipObj)
                 for (var key in tipObj) {
+                    //为每个p元素添加点击事件
                     tipObj[key].onclick = function() {
                         iptObj.value = this.innerText;
                     }
                 }
-
             }
-
-
         }
     </script>
 
