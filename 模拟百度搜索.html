@@ -1,10 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>模拟百度搜索</title>
+    <meta charset="UTF-8">
+    <title>模拟百度搜索</title>
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .clearfix::after {
+            content: ".";
+            height: 0;
+            display: block;
+            clear: both;
+            visibility: hidden;
+        }
+        
+        #search-box {
+            /* text-align: center; */
+            margin: 20px 0 0 100px;
+            position: relative;
+        }
+        
+        #wrap {
+            /* display: inline-block; */
+            /* border: 1px solid #999999; */
+            padding: 0 6px;
+            height: 26px;
+            width: 200px;
+            border: 1px solid #3388FF;
+            float: left;
+        }
+        
+        #input {
+            width: 90%;
+            height: 26px;
+            /* padding: 0px; */
+            border: none;
+            outline: none;
+        }
+        
+        .fa-search {
+            width: 10%;
+            line-height: 26px;
+            color: #999999;
+        }
+        
+        #search {
+            width: 80px;
+            height: 28px;
+            line-height: 28px;
+            color: #FFFFFF;
+            background: #3388FF;
+            border: none;
+            outline: none;
+            float: left;
+            cursor: pointer;
+        }
+        
+        #tip-box {
+            position: absolute;
+            width: 292px;
+            top: 27px;
+            border: 1px solid #999999;
+        }
+        
+        #tip-box p {
+            cursor: default;
+        }
+        
+        #tip-box p:hover {
+            background-color: #eeeeee;
+        }
+    </style>
 </head>
+
 <body>
-	
+    <div id="search-box" class="clearfix">
+        <div id="wrap">
+            <input id="input" type="text" name="" id=""><i class="fa fa-search"></i>
+        </div>
+
+        <input id="search" type="button" value="搜索">
+        <!-- <div id="tip-box">afdgsdgsdgsdg</div> -->
+    </div>
+    <script>
+        var words = ["apple park", "airplane", "bank game", "我们不一样", "hahaha"];
+        var iptObj = document.getElementById("input");
+        var boxObj = document.getElementById("search-box");
+
+        iptObj.onkeyup = function() { //键盘抬起事件
+            if (document.getElementById("tip-box"))
+            //如果提示框存在，先移除
+                boxObj.removeChild(document.getElementById("tip-box"));
+            var word = iptObj.value; //输入框的值
+            var tempArr = []; //临时数组存提示词
+            console.log(word)
+            for (let i = 0; i < words.length; i++) {
+                if (words[i].indexOf(word) == 0 && word != "") { //判断是否以输入的词开头
+                    tempArr.push(words[i]);
+                }
+            }
+            if (word == "" || tempArr.length == 0) {
+                //如果输入为空或临时数组为空，应该移除提示框
+                if (document.getElementById("tip-box")) {
+                    boxObj.removeChild(document.getElementById("tip-box"));
+                }
+                return; //直接返回，不用执行后面的创建元素代码
+            }
+            var tipDiv = document.createElement("div");
+            boxObj.appendChild(tipDiv); //添加
+            tipDiv.id = "tip-box";
+            // var str = "";
+            for (let i = 0; i < tempArr.length; i++) {
+                var pObj = document.createElement("p");
+                //把p加到div中
+                tipDiv.appendChild(pObj);
+                pObj.innerHTML = tempArr[i];
+            }
+            if (document.getElementById("tip-box")) {
+                // console.log("tipObj")
+                var tipObj = document.getElementById("tip-box").children;
+                console.log(tipObj)
+                for (var key in tipObj) {
+                    tipObj[key].onclick = function() {
+                        iptObj.value = this.innerText;
+                    }
+                }
+
+            }
+
+
+        }
+    </script>
+
 </body>
+
 </html>
