@@ -7,29 +7,132 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>贪食蛇</title>
     <style>
+        body {
+            background-image: url("img/colorful-bg.png");
+        }
+        
+        .score {
+            text-align: center;
+        }
+        
         .map {
             width: 800px;
-            height: 600px;
-            background-color: #CCC;
+            height: 500px;
+            background-image: url("img/gray-bg.png");
             position: relative;
+            margin: 0 auto;
+        }
+        /* .map div:first-child {
+            background-image: url("img/food1.png");
+        } */
+        
+        .right:nth-child(2) {
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            position: relative;
+        }
+        
+        .right:nth-child(2)::after {
+            content: "";
+            background: url("img/eye.png") no-repeat center;
+            display: block;
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            top: -1px;
+            left: -1px;
+            background-size: 22px;
+            transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            /* IE 9 */
+            -webkit-transform: rotate(90deg);
+            /* Safari and Chrome */
+        }
+        
+        .left:nth-child(2) {
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+        
+        .left:nth-child(2)::after {
+            content: "";
+            background: url("img/eye.png") no-repeat center;
+            display: block;
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            top: -1px;
+            left: -1px;
+            background-size: 22px;
+            transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            /* IE 9 */
+            -webkit-transform: rotate(-90deg);
+            /* Safari and Chrome */
+        }
+        
+        .top:nth-child(2) {
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+        }
+        
+        .top:nth-child(2)::after {
+            content: "";
+            background: url("img/eye.png") no-repeat center;
+            display: block;
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            top: -1px;
+            left: -1px;
+            background-size: 22px;
+        }
+        
+        .bottom:nth-child(2) {
+            border-bottom-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+        
+        .bottom:nth-child(2)::after {
+            content: "";
+            background: url("img/eye.png") no-repeat center;
+            display: block;
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            top: -1px;
+            left: -1px;
+            background-size: 22px;
+            transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            /* IE 9 */
+            -webkit-transform: rotate(180deg);
+            /* Safari and Chrome */
+        }
+        
+        .map div:last-child {
+            opacity: 0.8;
         }
     </style>
 </head>
 
 <body>
+
+    <div class="score">分数：0</div>
     <!-- 地图 -->
     <div class="map"></div>
+
     <script>
         //自调用函数--食物的
         (function() {
             var elements = []; //用来保存每个小方块食物
-            //食物构造函数，横纵坐标，宽高，背景颜色
-            function Food(x, y, width, height, color) {
+            //食物构造函数，横纵坐标，宽高，背景
+            function Food(x, y, width, height, bg) {
                 this.x = x || 0;
                 this.y = y || 0;
                 this.width = width || 20;
                 this.height = height || 20;
-                this.color = color || "green";
+                this.bg = bg || "url('img/food1.png')";
             }
             //食物初始化函数，因为要在地图上显示食物，所以传需要map参数
             Food.prototype.init = function(map) {
@@ -41,7 +144,7 @@
                 //设置div的样式
                 div.style.width = this.width + "px";
                 div.style.height = this.height + "px";
-                div.style.backgroundColor = this.color;
+                div.style.backgroundImage = this.bg;
                 div.style.position = "absolute";
                 //随机横纵坐标
                 this.x = parseInt(Math.random() * (map.offsetWidth / this.width)) * this.width;
@@ -81,17 +184,17 @@
                 this.body = [{
                         x: 3,
                         y: 2,
-                        color: "red"
+                        color: "#dd4949"
                     }, //头
                     {
                         x: 2,
                         y: 2,
-                        color: "orange"
+                        color: "#ef6868"
                     }, //身体
                     {
                         x: 1,
                         y: 2,
-                        color: "orange"
+                        color: "#ef6868"
                     } //身体
                 ];
             }
@@ -106,6 +209,9 @@
                     var obj = this.body[i];
                     //创建div
                     var div = document.createElement("div");
+
+                    div.className = this.direction; //加上类，方便设置样式
+
                     //把div加入到map地图中
                     map.appendChild(div);
                     //设置div的样式
@@ -125,7 +231,7 @@
             };
 
             //为原型添加方法---小蛇动起来
-            Snake.prototype.move = function(food, map) {
+            Snake.prototype.move = function(food, map, game) {
 
                 var i = this.body.length - 1;
                 //小蛇身体的移动：让身体每一块去到前一块的坐标
@@ -153,6 +259,12 @@
                 var headX = this.body[0].x * this.width;
                 var headY = this.body[0].y * this.height;
                 if (headX == food.x && headY == food.y) {
+                    //分数+1
+                    game.score++;
+                    document.querySelector(".score").innerHTML = "分数：" + game.score;
+                    if (game.score >= 10) {
+                        food.bg = "url('img/food2.png')";
+                    }
                     //如果吃到食物，获取小蛇的最后的尾巴
                     var last = this.body[this.body.length - 1];
                     //并把最后的蛇尾复制一个,加入到小蛇的body中
@@ -189,6 +301,7 @@
                 this.food = new Food(); //食物对象
                 this.snake = new Snake(); //小蛇对象
                 this.map = map; //地图
+                this.score = 0;
             }
 
             //初始化游戏-----可以设置小蛇和食物显示出来
@@ -208,7 +321,7 @@
                 //使用定时器让小蛇自动的跑起来
                 var timeId = setInterval(function() {
                     //移动小蛇
-                    this.snake.move(food, map);
+                    this.snake.move(food, map, this);
                     //初始化小蛇
                     this.snake.init(map);
 
@@ -223,13 +336,13 @@
                     if (headX < 0 || headX >= maxX) {
                         //撞墙了,停止定时器
                         clearInterval(timeId);
-                        alert("游戏结束！");
+                        alert("游戏结束！ 得分：" + this.score);
                     }
                     //纵坐标
                     if (headY < 0 || headY >= maxY) {
                         //撞墙了,停止定时器
                         clearInterval(timeId);
-                        alert("游戏结束！");
+                        alert("游戏结束！ 得分：" + this.score);
                     }
                 }.bind(this), 160);
                 //bind(this)绑定Game对象，否则定时器里的this为window对象了
