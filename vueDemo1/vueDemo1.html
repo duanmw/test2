@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueDemo</title>
+    <script src="../js/vue-2.4.0.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+        
+        .green {
+            color: green;
+        }
+        
+        body {
+            /* height: 500px;
+            border: 1px solid red;*/
+            /* display: flex;
+            align-items: center; */
+            /* display: table-cell;
+            vertical-align: middle; */
+        }
+        /* #app {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>---{{ msg+",haha" }}</p>
+        <!-- <p :style="styleObj">---{{"1+3="+( 1+3) }}</p>
+        <h4 v-text="msg" :class="flag?'red':'green'">---</h4>
+        <h4 v-text="msg" :class="flag?color1:'green'">---</h4> -->
+
+        <!-- v-bind 只能实现单向绑定，从 M 自动绑定到 V -->
+        <a v-bind:class=" color1">...</a>
+        <!-- v-model实现双向绑定  -->
+        <input type="text" v-model="msg ">
+        <input type="password" v-model="msg ">
+
+        <!-- v-for数组 -->
+        <p v-for="(item,index) in list">{{index+"："+item}}</p>
+        <!-- v-for对象 -->
+        <p v-for="(value,key,index) in styleObj">{{index+"：key:"+key+",value:"+value}}</p>
+
+    </div>
+    <script></script>
+    <script>
+        var msg = 'Hello world!';
+        // MVVM中的 VM
+        var vm = new Vue({
+            el: '#app',
+            // 这里的 data 就是 MVVM中的 M
+            data: {
+                flag: true,
+                msg,
+                color1: "red",
+                styleObj: {
+                    color: 'gray',
+                    'font-size': "24px"
+                },
+                list: [12, 13, 14]
+            }
+        });
+        //         var count = 23;
+        //         document.getElementById("app").innerHTML = `
+        // There are <b>${count}</b> items`;
+        // var arr = [2, 2, 3, 3, 5, 2.2, 2];
+        // console.log(new Set(arr));
+
+        // setInterval(function() {
+        //     let dt = new Date();
+        //     let h = dt.getHours().toString().padStart(2, "0");
+        //     let m = dt.getMinutes().toString().padStart(2, "0");
+        //     let s = dt.getSeconds().toString().padStart(2, "0");
+        //     console.log(h, m, s);
+        // }, 1000)
+    </script>
+</body>
+
+</html>
