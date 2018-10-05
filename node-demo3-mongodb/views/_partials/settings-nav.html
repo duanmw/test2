@@ -1,0 +1,12 @@
+<div class="col-md-3 list-group">
+    <a href="#" class="list-group-item disabled">用户设置</a>
+    <a id="nav-a2" href="/settings/profile" class="list-group-item active">基本信息</a>
+    <a id="nav-a3" href="/settings/admin" class="list-group-item">账户设置</a>
+</div>
+<script>
+    if (window.location.pathname == '/settings/admin') {
+
+        document.getElementById("nav-a3").classList.add("active");
+        document.getElementById("nav-a2").classList.remove("active");
+    }
+</script>
