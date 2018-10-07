@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue动画</title>
+    <script src="../js/vue-2.4.0.js"></script>
+    <link rel="stylesheet" href="../css/animate.css">
+    <style>
+        /* v-enter 【这是一个时间点】 是进入之前，元素的起始状态，此时还没有开始进入 */
+        /* v-leave-to 【这是一个时间点】 是动画离开之后，离开的终止状态，此时，元素 动画已经结束了 */
+        
+        .my-enter,
+        .my-leave-to {
+            opacity: 0;
+            transform: translate(150px, 50px);
+            /* transform: translateY(150px); */
+        }
+        /* v-enter-active 【入场动画的时间段】 */
+        /* v-leave-active 【离场动画的时间段】 */
+        
+        .my-enter-active,
+        .my-leave-active {
+            transition: all 0.8s ease;
+        }
+        
+        .ball {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <input type="button" value="使用钩子函数" @click="flag1=!flag1">
+
+        <!-- 需求： 点击按钮，让 h3 显示，再点击，让 h3 隐藏 -->
+        <!-- 1. 使用 transition 元素，把 需要被动画控制的元素，包裹起来 -->
+        <!-- transition 元素，是 Vue 官方提供的 -->
+        <!-- <transition name="my">
+            <h3 v-if="flag">这是一个H3</h3>
+        </transition> -->
+        <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" :duration="1000">
+            <h3 v-if="flag">这是一个H3</h3>
+        </transition>
+
+
+        <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+            <div class="ball" v-show="flag1"></div>
+        </transition>
+    </div>
+
+    <script>
+        // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false,
+                flag1: false
+            },
+            methods: {
+                beforeEnter(el) {
+                    el.style.transform = "translate(0, 0)"
+                },
+                enter(el, done) {
+                    el.offsetWidth //触发重排重绘，不写出不来动画效果
+                    el.style.transform = "translate(150px, 250px)"
+                    el.style.transition = 'all 1s ease'
+                    done()
+                },
+                afterEnter(el) {
+                    this.flag1 = !this.flag1
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
