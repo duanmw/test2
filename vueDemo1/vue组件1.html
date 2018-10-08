@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue组件</title>
+    <script src="../js/vue-2.4.0.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            /* transform: scale(1.5, 1.5); */
+            /* transform: rotateX(90deg); */
+            transform: translateY(50px);
+        }
+        
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app1">
+        <my></my>
+        <!-- <login></login> -->
+    </div>
+    <div id="app2">
+        <a href="" @click.prevent="comName='login'">登录</a>
+        <a href="" @click.prevent="comName='register'">注册</a>
+        <!-- 组件过渡  mode为过渡模式-->
+        <transition mode="out-in">
+            <!-- component 是一个占位符, :is 属性,可以用来指定要展示的组件的名称 -->
+            <component :is="comName"></component>
+        </transition>
+    </div>
+    <script>
+        Vue.component('my', {
+            //组件中的DOM结构，有且只能有唯一的根元素来进行包裹！
+            template: '<div><h2>Vue.component</h2>A 全局 component!</div>'
+        })
+        var vm1 = new Vue({
+            el: '#app1',
+            data: {},
+            methods: {}
+        })
+        var vm2 = new Vue({
+            el: '#app2',
+            data: {
+                comName: 'login'
+            },
+            methods: {},
+            components: {
+                login: {
+                    template: '<div><h2>一个局部component: login</h2></div>'
+                },
+                register: {
+                    template: '<div><h2>一个局部component: register</h2></div>'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
