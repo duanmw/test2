@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue父子组件通信</title>
+    <script src="../js/vue-2.4.0.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            /* transform: scale(1.5, 1.5); */
+            /* transform: rotateX(90deg); */
+            transform: translateY(50px);
+        }
+        
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h3>父组件数据:{{msg}}</h3>
+        <!-- <a href="" @click.prevent="comName='login'">登录</a>
+        <a href="" @click.prevent="comName='register'">注册</a> -->
+        <!-- 组件过渡  mode为过渡模式-->
+        <!-- <transition mode="out-in"> -->
+        <!-- component 是一个占位符, :is 属性,可以用来指定要展示的组件的名称 -->
+        <!-- <component :is="comName" :my-msg='msg'></component> -->
+        <!--!!! my-msg在vue实例里变为myMsg -->
+        <!-- </transition> -->
+        <login @func="faMethod" :my-msg='msg'></login>
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <h2 @click='clickme' title="clickme">这是 子组件: login</h2>
+            <p>来自父组件的数据：{{myMsg}}</p>
+
+        </div>
+    </template>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'father msg',
+                comName: 'login'
+            },
+            methods: {
+                faMethod(data) {
+                    this.msg = data
+                }
+            },
+            components: {
+                login: {
+                    // template: '<div><h2>一个局部component: login{{"父组件传递的"+ myMsg}}</h2></div>',
+                    template: '#tmpl',
+                    data() { //组件data必须是函数
+                        return {
+                            child: '这是子组件data数据,可以传给父组件'
+                        }
+                    },
+                    props: ['myMsg'],
+
+                    methods: {
+                        clickme() {
+                            alert(this.child)
+                            this.$emit('func', this.child)
+                        }
+                    }
+                },
+                register: {
+                    template: '<div><h2>一个局部component: register</h2></div>'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
