@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router使用</title>
+    <script src="../js/vue-2.4.0.js"></script>
+    <script src="../js/vue-router-3.0.1.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.3s;
+        }
+        
+        .myactive {
+            color: red;
+            font-size: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{curPath}}</h2>
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
+    <script>
+        var login = {
+            template: '<h3>登录子组件</h3>'
+        }
+        var register = {
+                template: '<h3>注册子组件</h3>'
+            }
+            // 创建一个路由对象
+        var router = new VueRouter({
+            routes: [{
+                path: '/',
+                redirect: '/login'
+            }, {
+                path: '/login',
+                component: login
+            }, {
+                path: '/register',
+                component: register
+            }],
+            linkActiveClass: 'myactive' //修改被选中的链接类名
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                curPath: ''
+            },
+            methods: {},
+            // 使用 router 属性来使用路由规则
+            router, // router: router
+            watch: {
+                //  this.$route.path
+                '$route.path': function(newVal, oldVal) {
+                    console.log(newVal + ' --- ' + oldVal)
+                    if (newVal === '/login') {
+                        this.curPath = '当前为登录页面';
+                    } else if (newVal === '/register') {
+                        this.curPath = '当前为注册页面';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
