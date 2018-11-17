@@ -20,10 +20,26 @@
         .v-leave-active {
             transition: all 0.3s;
         }
+        
+        table {
+            /* border-collapse: collapse; */
+            /*边框变细*/
+            position: absolute;
+            left: 50%;
+            width: 200px;
+            /* margin-left: -50px; */
+            transform: translateX(-50%);
+        }
     </style>
 </head>
 
 <body>
+    <table border="1" cellspacing="0">
+        <tr>
+            <td>12</td>
+            <td>24</td>
+        </tr>
+    </table>
     <div id="app1">
         <my></my>
         <!-- <login></login> -->

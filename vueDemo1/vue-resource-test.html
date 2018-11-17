@@ -13,6 +13,7 @@
 <body>
     <div id="app">
         <input type="button" value="get请求" @click="getInfo">
+        <input type="button" value="发送跨域请求" @click="jsonpInfo">
     </div>
     <script>
         //全局配置请求的数据接口 根域名，
@@ -45,8 +46,16 @@
                     })
                 },
                 jsonpInfo() { // 发起JSONP 请求
-                    this.$http.jsonp('').then(result => {
-                        console.log(result.body)
+                    // this.$http.jsonp('').then(result => {
+                    //     console.log(result.body)
+                    // })
+                    this.$http.jsonp('https://sug.so.360.cn/suggest', {
+                        params: {
+                            word: 'a'
+                        }
+                    }).then(res => {
+                        console.log(res.data); //data or body
+                        console.log(res);
                     })
                 }
             }
