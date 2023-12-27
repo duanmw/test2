@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+        <script>
+            //浏览器切换事件
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    console.log('页面不可见');
+                }
+            });
+            document.addEventListener("visibilitychange", function() {
+                if (document.visibilityState === 'visible') {
+                    console.log('页面visible');
+                } else {
+                    console.log('页面hidden');
+                }
+            });
+            window.addEventListener('pageshow', function(event) {
+                console.log('after , pageshow :', event);
+            });
+
+
+            window.addEventListener('load', function() {
+                console.log('load');
+            });
+            window.addEventListener("pagehide", event => {
+                console.log("pagehide")
+                // if (event.persisted) {
+                //      the page isn't being discarded, so it can be reused later 
+                //     console.log("event.persisted", event.persisted)
+                // }
+            }, false);
+        </script>
+    </body>
+
+</html>

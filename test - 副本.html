@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+     <pre></pre>
+
+    <script>
+        var data = `array (
+  '_id' => '63f34fe43e590b4a1521d9226dc4a36a',
+  'queue_key' => 'new_sync_queue_key_JSYX_SIHUA',
+  'sync_id' => 'JSYX_SIHUA',
+  'buss_type' => 'user',
+  'buss_property' => 'add_user2',
+  'msg_id' => 'jsyx_testuser26_3',
+  'msg_data' => '"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>\\n<soap:Envelope xmlns:soap=\\"http:\\/\\/www.w3.org\\/2003\\/05\\/soap-envelope\\" xmlns:ser=\\"http:\\/\\/service.jscn.coship.com\\/\\">\\n   <soap:Header\\/>\\n   <soap:Body>\\n      <ser:syncUserInfo>\\n         <!--Optional:-->\\n         <userInfo>\\n            <!--Optional:-->\\n            <base_status>1<\\/base_status>\\n            <!--Optional:-->\\n            <cm_mac>00-DB-FB-71-56-F14<\\/cm_mac>\\n            <!--Optional:-->\\n            <customerCode>181818<\\/customerCode>\\n            <!--Zero or more repetitions:-->\\n            <customerGroup>\\n               <!--Optional:-->\\n               <groupId>818181<\\/groupId>\\n               <!--Optional:-->\\n               <groupName>818181<\\/groupName>\\n            <\\/customerGroup>\\n            <!--Optional:-->\\n            <customerLevel>0<\\/customerLevel>\\n            <!--Optional:-->\\n            <districtCode>1002<\\/districtCode>\\n            <!--Optional:-->\\n            <districtName>南京分公司<\\/districtName>\\n            <!--Optional:-->\\n            <education\\/>\\n            <!--Optional:-->\\n            <email>111222<\\/email>\\n            <!--Optional:-->\\n            <familyInfo\\/>\\n            <!--Optional:-->\\n            <IMSNumber\\/>\\n            <!--Optional:-->\\n            <interactive_status>5<\\/interactive_status>\\n            <!--Optional:-->\\n            <management_station_id>55555<\\/management_station_id>\\n            <!--Optional:-->\\n            <management_station_name>cs<\\/management_station_name>\\n            <!--Optional:-->\\n            <phoneNumber>18122223333<\\/phoneNumber>\\n            <!--Optional:-->\\n            <setTopBoxId>1S1AB123448<\\/setTopBoxId>\\n            <!--Optional:-->\\n            <smartCardId>1S1AB123448<\\/smartCardId>\\n            <!--Optional:-->\\n            <status>1<\\/status>\\n            <!--Optional:-->\\n            <stb_mac>00-DB-FB-71-56-F14<\\/stb_mac>\\n            <!--Optional:-->\\n            <TVCode>3333<\\/TVCode>\\n            <!--Optional:-->\\n            <type>2<\\/type>\\n            <!--Optional:-->\\n            <userId>jsyx_testuser26<\\/userId>\\n            <!--Optional:-->\\n            <userName>JSYXCS26<\\/userName>\\n            <!--Optional:-->\\n            <userPassword>123456<\\/userPassword>\\n            <!--Optional:-->\\n            <user_prop\\/>\\n            <!--Optional:-->\\n            <resTypeId\\/>\\n            <!--Optional:-->\\n            <yzyp_cl_1>11001<\\/yzyp_cl_1>\\n            <!--Optional:-->\\n            <yzyp_cl_2>11002<\\/yzyp_cl_2>\\n            <!--Optional:-->\\n            <yzyp_cl_3>11003<\\/yzyp_cl_3>\\n            <!--Optional:-->\\n            <yzyp_cl_4>11004<\\/yzyp_cl_4>\\n         <\\/userInfo>\\n      <\\/ser:syncUserInfo>\\n   <\\/soap:Body>\\n<\\/soap:Envelope>"',
+  'cust_code' => '',
+  'user_code' => '',
+  'state' => 0,
+  'request_url' => 'http://192.168.94.73/nn_cms/api/jsyx/webservice/user_and_auth_from_boss/CoshipServiceStarcorService.php?wsdl',
+  'response' => '<xmp><?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" xmlns:ns1="http://service.jscn.coship.com/"><env:Body><ns1:syncUserInfoResponse><return><resultCode>0</resultCode><resultMessage>成功</resultMessage></return></ns1:syncUserInfoResponse></env:Body></env:Envelope></xmp>',
+  'sync_time' => '2023-02-20 18:49:01',
+  'create_time' => '2023-02-20 18:48:04',
+  'retry_time' => '',
+  'create_micro_time' => '1676890084099761400',
+  'server_ip' => 'BO_department.',
+)`;
+
+// 避免xml被解析成html标签，对‘<’符号转义
+    data = data.replace(/</g, "&lt;"); // TODO
+        document.getElementsByTagName("pre")[0].innerHTML =  data;
+         
+    </script>
+</body>
+
+</html>

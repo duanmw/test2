@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       .wrapper{
+        width: 100%;
+        display: grid;
+        /* grid-auto-flow: column; */
+        grid-auto-rows: auto;
+        justify-content: space-between;
+        align-items: stretch;
+        /* grid-template-rows: 70px; */
+        gap: 40px;
+        grid-template-columns: repeat(2, 1fr);
+       }
+        .item{
+            display: flex;
+        }
+       .item input{
+            /* width: 300px; */
+            flex: 1;
+       }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="item"><label>AA</label><input type="text"></div>
+        <div class="item"><label>BB</label><input type="text"></div>
+        <div class="item"><label>CC</label><input type="text"></div>
+        <div class="item"><label>DD</label><input type="text"></div>
+        <div class="item"><label>EE</label><input type="text"></div>
+        <div class="item"><label>FF</label><input type="text"></div>
+        <div class=""><button>Search</button><button>Reset</button></div>
+    </div>
+     
+</body>
+
+</html>
