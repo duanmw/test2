@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>渐变ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            backgroundColor: "#161736",
+            title: {
+                // text: "XXXXX",
+                // textStyle: {
+                //     fontSize: 18,
+                //     color: "#C0C4CC"
+                // },
+                // x: "center",
+                // y: "top"
+            },
+            // tooltip: {
+            //     trigger: "axis",
+            //     axisPointer: {
+            //     // 坐标轴指示器，坐标轴触发有效
+            //     type: "line" // 默认为直线，可选为：'line' | 'shadow'
+            //   }
+            // },
+            legend: {
+                data:['影片'],
+                top:10,
+                right:40,
+                textStyle:{
+                    color:"#79799D",
+                }
+            },
+            xAxis: [
+            {
+                axisLine: {
+                  lineStyle: { color: "#79799D" }
+                },
+                // boundaryGap: ['20%', '20%'],
+                type: "category",
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋"],
+                axisTick: {
+                  show: false
+                }
+            }
+            ],
+            yAxis: [
+            {
+                // name: "数量",
+                type: "value",
+                axisLabel: {
+                    color: '#79799D',
+                },
+                axisLine: {
+                    show: false
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#272456'
+                    }
+                }
+            }
+            ],
+            series: [
+            {
+                name: "影片",
+                type: "bar",
+                barWidth: "50%",
+                data: [9, 20, 36, 10, 12],
+                // label: {
+                //   normal: {
+                //     show: true,
+                //     position: "top",
+                //     textStyle: {
+                //       color: "#C0C4CC",
+                //       fontSize: 16
+                //     }
+                //   }
+                // },
+                animationDuration: 2600, //初始动画的时长
+                itemStyle: {
+                  normal: {
+                    color: new echarts.graphic.LinearGradient(0,0,0,1,
+                      [
+                        {
+                          offset: 0,
+                          color: "#5F60BE"// 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: "#212145"// 100% 处的颜色
+                        }
+                      ],
+                      false
+                    )
+                  },
+                  emphasis:{
+                    color: new echarts.graphic.LinearGradient(0,0,0,1,
+                      [
+                        {
+                          offset: 0,
+                          color: "#8D87DD"// 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: "#0E728A"// 100% 处的颜色
+                        }
+                      ],
+                      false
+                    )
+                  }
+                },
+                markPoint:{
+                    symbol:"pin",
+                    // label:"上线栏目数："+72,
+                    data: [
+                        {
+                            name: '最大值',
+                            // type: 'max'
+                        }, 
+                        // {
+                        //     name: '某个坐标',
+                        //     coord: [10, 20]
+                        // }, {
+                        //     name: '固定 x 像素位置',
+                        //     yAxis: 10,
+                        //     x: '90%'
+                        // }, 
+                        // {
+                        //     name: '某个屏幕坐标',
+                        //     x: 100,
+                        //     y: 100
+                        // }
+                    ]
+                }
+            }
+        ]};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

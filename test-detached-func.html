@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>as</title>
+</head>
+<body>
+	<button id="btn">create dom</button>
+	<script type="text/javascript">
+		let obj=null;
+		function create(){
+			let ul=document.createElement("ul");
+			let li = document.createElement("li");
+			li.innerText="teasdfsd";
+			ul.appendChild(li);
+			obj = ul;
+			// document.body.appendChild(ul)
+		}
+		btn.addEventListener("click", create)
+		// detached DOM
+
+	</script>
+
+</body>
+</html>

@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <style>
-        canvas {
-            width: 400px;
-            height: 180px;
-            background: white;
-            margin: 0 auto;
-            border: 1px solid #ddd;
-        }
+      canvas {
+        width: 400px;
+        height: 180px;
+        background: white;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <p id='button1'>1</p>
-    <p id='button2'>2</p>
-    <p id='button3'>3</p>
-    <p id='button4'>4</p>
-    <canvas id="canvas">
-    </canvas>
+  <body>
+    <p id="button1">
+      1 <a>haha<a>haha</a></a>
+    </p>
+    <p id="button2">2</p>
+    <p id="button3">3</p>
+    <p id="button4">4</p>
+    <canvas id="canvas"> </canvas>
 
     <script>
-        for (var i = 1; i < 4; i++) {
-            var b = document.getElementById("button" + i);
-            b.addEventListener("click", function() {
-                alert("Button" + i);
-            }, false);
-        }
-        console.log(i) //i=4
+      for (var i = 1; i < 4; i++) {
+        var b = document.getElementById("button" + i);
+        b.addEventListener(
+          "click",
+          function () {
+            alert("Button" + i);
+          },
+          false
+        );
+      }
+      console.log(i); //i=4
     </script>
-</body>
-
+  </body>
 </html>
